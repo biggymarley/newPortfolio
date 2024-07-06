@@ -18,7 +18,7 @@ const About = () => {
         </div>
         <div  data-aos="fade-left" data-aos-delay="400" className="mx-auto">
           <div className="">
-            <img src={require("./imgs/man.png")} alt="" />
+            <img src={require("./imgs/man1.png")} alt="" className="h-[400px] object-contain"/>
           </div>
           <div className="border flex items-center gap-2 border-[#ABB2BF] p-2 text-[#ABB2BF]">
             <div className="w-4 h-4 bg-[#6cbbff]"></div>
