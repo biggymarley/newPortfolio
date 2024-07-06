@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "./about.css";
 
 const About = () => {
@@ -10,15 +11,24 @@ const About = () => {
             <span className="text-[#6cbbff]">full-stack developer</span>
           </h1>
           <p className="text-[#ABB2BF] my-6">
-          seasoned full-stack developer specializing in front-end development, adept in CSS and JavaScript frameworks like React, React Native, and Node.js, with deep expertise in user experience and psychology.
+            seasoned full-stack developer specializing in front-end development,
+            adept in CSS and JavaScript frameworks like React, React Native, and
+            Node.js, with deep expertise in user experience and psychology.
           </p>
-          <button className="text-white font-medium py-2 px-4 border duration-200 border-[#6cbbff] hover:bg-[#6cbbff33]">
+          <NavLink
+            to="/contact"
+            className="text-white font-medium py-2 px-4 border duration-200 border-[#6cbbff] hover:bg-[#6cbbff33]"
+          >
             Contact me!!
-          </button>
+          </NavLink>
         </div>
-        <div  data-aos="fade-left" data-aos-delay="400" className="mx-auto">
+        <div data-aos="fade-left" data-aos-delay="400" className="mx-auto">
           <div className="">
-            <img src={require("./imgs/man1.png")} alt="" className="h-[400px] object-contain"/>
+            <img
+              src={require("./imgs/man1.png")}
+              alt=""
+              className="h-[400px] object-contain"
+            />
           </div>
           <div className="border flex items-center gap-2 border-[#ABB2BF] p-2 text-[#ABB2BF]">
             <div className="w-4 h-4 bg-[#6cbbff]"></div>

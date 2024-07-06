@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const AboutSec = () => {
   return (
     <>
@@ -27,12 +29,12 @@ const AboutSec = () => {
             </p>
             {/* button */}
             <div className="mt-7">
-              <a
-                href="#"
+              <NavLink
+                to="/about"
                 className=" duration-150 hover:bg-[#6cbbff33] border border-[#6cbbff] px-4 py-2 text-white "
               >
                 <button>Read more -{">"}</button>
-              </a>
+              </NavLink>
             </div>
           </div>
           {/* right */}

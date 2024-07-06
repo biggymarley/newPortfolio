@@ -2,6 +2,7 @@ import Project_card from "../project_card/Project_card";
 import first from "./imgs/chillcloud.png";
 import second from "./imgs/bigflix.png";
 import third from "./imgs/matcha.png";
+import { NavLink } from "react-router-dom";
 
 const Projects = () => {
   // date
@@ -78,9 +79,9 @@ const Projects = () => {
           </div>
           {/* right */}
           <div className=" text-white font-medium">
-            <a href="">
+            <NavLink to="/projects">
               <span>View all ~~&gt;</span>
-            </a>
+            </NavLink>
           </div>
         </div>
         {/* bottom */}
