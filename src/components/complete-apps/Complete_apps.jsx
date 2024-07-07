@@ -4,6 +4,7 @@ import first from "./imgs/chillcloud.png";
 import second from "./imgs/bigflix.png";
 import third from "./imgs/matcha.png";
 import bike from "./imgs/bike.png";
+import ai from "./imgs/ai.png";
 import startincub from "./imgs/startincub.png";
 
 import Project_card from "../project_card/Project_card";
@@ -54,7 +55,7 @@ const Complete_apps = () => {
       link: "https://bikerental.vercel.app/",
     },
     {
-      img: second,
+      img: ai,
       langs: ["React", "TailwinCss", "javascript", "css", "vite", "vercel"],
       title: "Landing page",
       link: "https://obi-landing.vercel.app/",

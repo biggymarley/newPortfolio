@@ -11,8 +11,8 @@ const Footer = () => {
           <div className="mx-auto md:mx-0">
             <div className=" flex items-center gap-8 mb-3 ">
               {/* logo */}
-              <div className=" flex gap-2 items-center text-2xl text-white font-bold">
-                <img src={require("./imgs/Logo.png")} alt="" />
+              <div className=" flex  items-center text-2xl text-white font-bold">
+                <img src={require("./imgs/Logo.png")} alt="" className="w-20 invert grayscale"/>
                 <span>Ayoub</span>
               </div>
               {/* email */}
