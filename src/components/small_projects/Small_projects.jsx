@@ -7,9 +7,15 @@ const Small_projects = () => {
   let projects = [
     {
       languages: ["React", "CSS", "Material UI"],
-      title: "Contact-Us Form using Material UI",
-      body: "Contact-Us Form",
+      title: "Contact-Us Form",
+      body: "Contact-Us Form using Material UI",
       link: "https://github.com/biggymarley/ContactUs",
+    },
+    {
+      languages: ["Nodejs", "Expressjs", "Render"],
+      title: "Stripe Payment Server",
+      body: "Stripe Payment Server",
+      link: "https://github.com/biggymarley/pymentserver",
     },
     {
       languages: ["React", "CSS", "Material UI"],
@@ -17,6 +23,13 @@ const Small_projects = () => {
       link: "https://github.com/biggymarley/LoginFrom",
 
       body: "Login Form using Material UI",
+    },
+    {
+      languages: ["React", "Material UI"],
+      title: "Pong",
+      link: "https://biggymarley.github.io/Pong/",
+
+      body: "Pong game design",
     },
     {
       languages: ["C"],
