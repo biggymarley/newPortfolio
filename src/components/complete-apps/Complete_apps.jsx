@@ -6,11 +6,26 @@ import third from "./imgs/matcha.png";
 import bike from "./imgs/bike.png";
 import ai from "./imgs/ai.png";
 import startincub from "./imgs/startincub.png";
+import omart from "./imgs/omart.png";
 
 import Project_card from "../project_card/Project_card";
 
 const Complete_apps = () => {
   const projects = [
+    {
+      img: omart,
+      langs: [
+        "Nextjs",
+        "Typescript",
+        "tailwind css",
+        "Shopify",
+        "Storefront Api",
+        "vercel",
+      ],
+      title: "Omart.",
+      disc: "Ecommerce Website Powered by Shopify Storefront API",
+      link: "https://omart-strings.vercel.app/",
+    },
     {
       img: first,
       langs: [
