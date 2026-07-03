@@ -3,11 +3,39 @@ import first from "./imgs/chillcloud.png";
 import second from "./imgs/bigflix.png";
 import third from "./imgs/matcha.png";
 import omart from "./imgs/omart.png";
+import bigflixv2 from "./imgs/bigflixv2.png";
+import tazuri from "./imgs/tazuri.png";
 import { NavLink } from "react-router-dom";
 
 const Projects = () => {
   // date
   const projects = [
+    {
+      img: bigflixv2,
+      langs: [
+        "Nextjs",
+        "Typescript",
+        "tailwind css",
+        "TMDB API",
+        "Streaming",
+        "vercel",
+      ],
+      title: "Bigflix V2",
+      disc: "Streaming your favorite movie/show",
+      link: "https://bigflixv2.vercel.app/",
+    },
+    {
+      img: tazuri,
+      langs: [
+        "Nextjs",
+        "Typescript",
+        "Tailwind css",
+        "vercel",
+      ],
+      title: "Tazuri",
+      disc: "Hostel Landing Page",
+      link: "https://tazuri-woad.vercel.app/",
+    },
     {
       img: omart,
       langs: [
