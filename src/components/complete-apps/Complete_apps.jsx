@@ -7,11 +7,39 @@ import bike from "./imgs/bike.png";
 import ai from "./imgs/ai.png";
 import startincub from "./imgs/startincub.png";
 import omart from "./imgs/omart.png";
+import bigflixv2 from "./imgs/bigflixv2.png";
+import tazuri from "./imgs/tazuri.png";
 
 import Project_card from "../project_card/Project_card";
 
 const Complete_apps = () => {
   const projects = [
+        {
+      img: bigflixv2,
+      langs: [
+        "Nextjs",
+        "Typescript",
+        "tailwind css",
+        "TMDB API",
+        "Streaming",
+        "vercel",
+      ],
+      title: "Bigflix V2",
+      disc: "Streaming your favorite movie/show",
+      link: "https://bigflixv2.vercel.app/",
+    },
+    {
+      img: tazuri,
+      langs: [
+        "Nextjs",
+        "Typescript",
+        "Tailwind css",
+        "vercel",
+      ],
+      title: "Tazuri",
+      disc: "Hostel Landing Page",
+      link: "https://tazuri-woad.vercel.app/",
+    },
     {
       img: omart,
       langs: [
