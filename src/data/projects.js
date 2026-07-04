@@ -1,4 +1,5 @@
 import ai from "../assets/projects/ai.webp";
+import bunk from "../assets/projects/bunk.webp";
 import bigflix from "../assets/projects/bigflix.webp";
 import bigflixv2 from "../assets/projects/bigflixv2.webp";
 import bike from "../assets/projects/bike.webp";
@@ -11,6 +12,14 @@ import tazuri from "../assets/projects/tazuri.webp";
 // Single source of truth for every project shown on the site.
 // `featured: true` marks the ones that appear on the home page.
 export const projects = [
+  {
+    img: bunk,
+    langs: ["Nextjs", "Typescript", "Supabase", "Realtime chat", "vercel"],
+    title: "Bunk",
+    disc: "Work-for-stay platform — hostels post volunteer gigs, travelers trade a few hours for a free bed",
+    link: "https://www.bunk.surf/",
+    featured: true,
+  },
   {
     img: bigflixv2,
     langs: ["Nextjs", "Typescript", "tailwind css", "TMDB API", "Streaming", "vercel"],
@@ -64,7 +73,6 @@ export const projects = [
     title: "Matcha",
     disc: "Tinder like app",
     link: "https://biggymarley.github.io/TinderClonePreview/",
-    featured: true,
   },
   {
     img: bike,

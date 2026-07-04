@@ -1,17 +1,17 @@
-import Projects from "../components/projects_section/Projects";
-import Skills from "../components/skills_section/Skills";
-import AboutSec from "../components/about_section/About";
-import Contact from "../components/contact_section/Contact";
-import About from "../components/first_section_about/About";
+import Hero from "../sections/Hero";
+import FeaturedProjects from "../sections/FeaturedProjects";
+import SkillsSection from "../sections/SkillsSection";
+import AboutSection from "../sections/AboutSection";
+import ContactSection from "../sections/ContactSection";
 
 const HomePage = () => {
   return (
     <>
-      <About />
-      <Projects />
-      <Skills />
-      <AboutSec />
-      <Contact />
+      <Hero />
+      <FeaturedProjects />
+      <SkillsSection />
+      <AboutSection />
+      <ContactSection />
     </>
   );
 };

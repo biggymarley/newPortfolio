@@ -1,7 +1,11 @@
-import Contact from "../components/contact_contact_page/Contact";
+import ContactSection from "../sections/ContactSection";
 
 const ContactPage = () => {
-  return <Contact />;
+  return (
+    <div className="pt-12">
+      <ContactSection full />
+    </div>
+  );
 };
 
 export default ContactPage;

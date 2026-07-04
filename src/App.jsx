@@ -1,27 +1,33 @@
 import { Route, Routes } from "react-router-dom";
-import Footer from "./components/footer/Footer";
-import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import ScrollToTop from "./components/ScrollToTop";
 import HomePage from "./pages/HomePage";
 import ProjectsPage from "./pages/ProjectsPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 
 function App() {
   useEffect(() => {
-    Aos.init({ duration: 1000, delay: 500 });
+    Aos.init({ duration: 600, once: true, offset: 60, easing: "ease-out-cubic" });
   }, []);
   return (
-    <div className="bg-[#282C33] overflow-hidden">
+    <div className="overflow-x-clip">
+      <ScrollToTop />
       <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
       <Footer />
     </div>
   );

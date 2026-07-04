@@ -1,14 +1,14 @@
-import About from "../components/about_page_about_section/About";
-import FunFacts from "../components/fun_facts/FunFacts";
-import Skills from "../components/skills_about_page/Skills";
+import AboutSection from "../sections/AboutSection";
+import SkillsSection from "../sections/SkillsSection";
+import FunFacts from "../sections/FunFacts";
 
 const AboutPage = () => {
   return (
-    <>
-      <About />
-      <Skills />
+    <div className="pt-12">
+      <AboutSection full />
+      <SkillsSection />
       <FunFacts />
-    </>
+    </div>
   );
 };
 

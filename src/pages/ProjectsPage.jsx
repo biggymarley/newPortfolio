@@ -1,10 +1,10 @@
-import CompleteApps from "../components/complete-apps/CompleteApps";
-import SmallProjects from "../components/small_projects/SmallProjects";
+import AllProjects from "../sections/AllProjects";
+import SmallProjects from "../sections/SmallProjects";
 
 const ProjectsPage = () => {
   return (
     <>
-      <CompleteApps />
+      <AllProjects />
       <SmallProjects />
     </>
   );

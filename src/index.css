@@ -1,11 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Fira Code', monospace;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-night text-fog font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-white;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent/70 ring-offset-2 ring-offset-night rounded-sm;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #3a4049 #22252b;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #22252b;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #3a4049;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(108, 187, 255, 0.4);
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply px-5 md:px-8 max-w-6xl mx-auto;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-mono text-sm font-medium px-5 py-2.5 rounded-md border transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-night-deep border-accent hover:shadow-glow hover:brightness-110;
+  }
+
+  .btn-outline {
+    @apply text-white border-line hover:border-accent hover:bg-accent-soft;
+  }
+
+  .chip {
+    @apply font-mono text-xs text-fog border border-line rounded px-2 py-0.5 bg-night-deep/60;
+  }
 }
