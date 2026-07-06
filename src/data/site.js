@@ -5,6 +5,9 @@ export const site = {
   location: "Morocco",
   email: "faragiayoubdev@gmail.com",
   discord: "biggyrr",
+  // WhatsApp number in international format, digits only (e.g. "2126XXXXXXXX").
+  // The WhatsApp contact card only shows once this is filled in.
+  whatsapp: "212635575600",
   github: "https://github.com/biggymarley",
   toptal: "https://www.toptal.com/resume/ayoub-faragi",
   toptalHire: "https://www.toptal.com/developers/resume/ayoub-faragi#NJg7pQ",
