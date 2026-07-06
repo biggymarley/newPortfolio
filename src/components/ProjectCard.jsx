@@ -1,15 +1,16 @@
-import { ArrowUpRight } from "./icons";
+import { Link } from "react-router-dom";
+import { ArrowUpRight, ClaudeSpark } from "./icons";
 
-const ProjectCard = ({ img, langs, title, disc, link }) => {
+const cardClass =
+  "group flex flex-col rounded-lg border border-line bg-night-raised/50 overflow-hidden transition-all duration-300 hover:border-accent/60 hover:shadow-glow hover:-translate-y-1";
+
+// Projects with a `slug` route to their internal detail page (live preview,
+// full description, skills); the rest keep opening `link` externally.
+const ProjectCard = ({ img, langs, title, disc, link, slug, claudeCode }) => {
   const isRepo = link.includes("github.com");
-  return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      data-aos="fade-up"
-      className="group flex flex-col rounded-lg border border-line bg-night-raised/50 overflow-hidden transition-all duration-300 hover:border-accent/60 hover:shadow-glow hover:-translate-y-1"
-    >
+
+  const content = (
+    <>
       {/* image */}
       <div className="aspect-video overflow-hidden border-b border-line">
         <img
@@ -35,11 +36,30 @@ const ProjectCard = ({ img, langs, title, disc, link }) => {
               {lang}
             </span>
           ))}
+          {claudeCode && (
+            <span className="chip inline-flex items-center gap-1 border-[#D97757]/50 text-[#D97757]">
+              <ClaudeSpark size={12} /> Claude Code
+            </span>
+          )}
         </div>
         <span className="font-mono text-xs text-accent mt-4 inline-flex items-center gap-1">
-          {isRepo ? "view code" : "view live"} {"<"}~{">"}
+          {slug ? "view more" : isRepo ? "view code" : "view live"} {"<"}~{">"}
         </span>
       </div>
+    </>
+  );
+
+  if (slug) {
+    return (
+      <Link to={`/projects/${slug}`} data-aos="fade-up" className={cardClass}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={link} target="_blank" rel="noopener noreferrer" data-aos="fade-up" className={cardClass}>
+      {content}
     </a>
   );
 };

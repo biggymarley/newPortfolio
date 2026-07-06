@@ -34,7 +34,7 @@ const Hero = () => {
       {/* ambient glow */}
       <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] rounded-full bg-accent/10 blur-[120px] pointer-events-none"></div>
 
-      <div className="container-site min-h-screen pt-28 pb-16 flex flex-col lg:flex-row items-center justify-between gap-14">
+      <div className="container-site pt-28 pb-12 lg:pt-32 flex flex-col lg:flex-row items-center justify-between gap-10">
         {/* left */}
         <div className="w-full lg:w-3/5" data-aos="fade-right">
           <p className="font-mono text-sm text-fog mb-4">
@@ -65,7 +65,7 @@ const Hero = () => {
           <img
             src={portrait}
             alt={site.name}
-            className="relative h-[340px] md:h-[400px] object-contain rounded-xl border border-line bg-night-deep/40"
+            className="relative h-[260px] md:h-[320px] object-contain rounded-xl border border-line bg-night-deep/40"
           />
           <a
             href={site.toptal}
