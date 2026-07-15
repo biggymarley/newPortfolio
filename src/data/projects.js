@@ -1,5 +1,6 @@
 import ai from "../assets/projects/ai.webp";
 import bunk from "../assets/projects/bunk.webp";
+import generalStore from "../assets/projects/general-store.png";
 import bigflix from "../assets/projects/bigflix.webp";
 import bigflixv2 from "../assets/projects/bigflixv2.webp";
 import bike from "../assets/projects/bike.webp";
@@ -19,6 +20,46 @@ import tazuri from "../assets/projects/tazuri.webp";
 // (live iframe preview + about + features + skills). Projects without a
 // slug (e.g. GitHub-only repos) keep linking straight to `link`.
 export const projects = [
+  {
+    slug: "general-goods",
+    img: generalStore,
+    langs: [
+      "Nextjs",
+      "Typescript",
+      "Supabase",
+      "Tailwind css",
+      "Stripe",
+      "Zustand",
+      "Motion",
+      "vercel",
+    ],
+    title: "General Goods Co.",
+    disc: "Outdoor gear ecommerce store with a full admin dashboard",
+    link: "https://general-store-peach.vercel.app/",
+    featured: true,
+    selfDesigned: true,
+    claudeCode: true,
+    about:
+      "General Goods Co. is a full production e-commerce storefront for outdoor gear, paired with a complete admin dashboard for running the store. Built on Next.js and Supabase, it handles the whole retail loop — catalog, cart, Stripe checkout, order fulfillment — while the admin side lets a non-technical owner manage products, orders, content, and discounts without touching code. The build was also engineered to pass Google Merchant Center review, with a live product feed and structured data kept in sync with the database.",
+    features: [
+      "Full storefront: home, filterable catalog, product pages, cart, and Stripe Checkout",
+      "Admin dashboard to manage products, variants, images, orders, discounts, categories, and content",
+      "Google Merchant Center-compliant product feed generated live from the database",
+      "Product structured data (JSON-LD) kept in sync with pricing, stock, and shipping for search rich results",
+      "Order lifecycle handled via Stripe webhooks: order creation, atomic stock decrement, and Resend emails",
+      "Row-level security on every table via Supabase, with role-based admin/editor access",
+      "Custom design system (Tailwind v4 tokens) with a rugged, print-inspired outdoor retail identity",
+    ],
+    skills: [
+      "Full-stack e-commerce architecture",
+      "Supabase (Postgres, Auth, RLS, Storage)",
+      "Stripe Checkout & webhooks",
+      "Admin dashboard & CRUD tooling",
+      "Technical SEO & structured data",
+      "Google Merchant Center compliance",
+      "Custom design systems",
+    ],
+  },
   {
     slug: "bunk",
     img: bunk,
