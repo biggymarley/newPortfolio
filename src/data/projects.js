@@ -1,4 +1,5 @@
 import ai from "../assets/projects/ai.webp";
+import poponi from "../assets/projects/poponi.webp";
 import bunk from "../assets/projects/bunk.webp";
 import generalStore from "../assets/projects/general-store.png";
 import bigflix from "../assets/projects/bigflix.webp";
@@ -20,6 +21,50 @@ import tazuri from "../assets/projects/tazuri.webp";
 // (live iframe preview + about + features + skills). Projects without a
 // slug (e.g. GitHub-only repos) keep linking straight to `link`.
 export const projects = [
+  {
+    slug: "poponi",
+    img: poponi,
+    langs: [
+      "Nextjs",
+      "Typescript",
+      "Supabase",
+      "Tailwind css",
+      "shadcn/ui",
+      "Resend",
+      "GSAP",
+      "Motion",
+      "vercel",
+    ],
+    title: "POPONI",
+    disc: "Bold streetwear storefront backed by a custom, expert-level admin dashboard a non-technical owner runs entirely on their own",
+    link: "https://www.poponi.shop",
+    featured: true,
+    selfDesigned: true,
+    claudeCode: true,
+    about:
+      "POPONI is a full-stack e-commerce platform for a one-person Moroccan streetwear studio: a loud, animated public storefront backed by a bespoke admin dashboard that lets a non-technical owner run the entire business — catalog, orders, custom requests, site media, and content — with no code and no third-party CMS. The public site reads live from the database and the admin writes to it, so changing a product, price, video, or homepage image is instantly live. It runs a real commerce loop — cart → checkout → server-priced orders → branded transactional email — with cash-on-delivery and prepaid options, and prices are authoritative in the database so the client can never dictate a total.",
+    features: [
+      "Custom storefront + custom admin — no Shopify, no headless CMS; everything is bespoke and owned",
+      "Server-first data flow: Server Components read Postgres, every mutation is a Server Action guarded by requireAdmin()",
+      "Price authority in the database — a SECURITY DEFINER Postgres function re-reads prices and recomputes subtotal/shipping/total server-side on every order",
+      "Admin-only auth with authorization enforced in the database via RLS and an is_admin() helper, not just the UI — no service-role key shipped in the app",
+      "Expert-level admin: KPI overview, sortable/selectable data tables, drag-to-reorder lists, and live previews that mirror exactly how content renders on the site",
+      "Rich content management for products, orders, custom 'Ask Me' requests, collabs, a graffiti section, and reusable media/avatar/sticker managers",
+      "Hand-built responsive transactional email (Resend): order confirmation, new-order alerts, and status updates sent only when the status actually changes",
+      "SEO throughout: dynamic sitemap/robots/manifest, Open Graph image generation, and JSON-LD structured data",
+    ],
+    skills: [
+      "Full-stack e-commerce architecture",
+      "Supabase (Postgres, Auth, RLS, Storage, RPC)",
+      "Database-authoritative pricing (SECURITY DEFINER)",
+      "Row-Level Security & auth hardening",
+      "Server Components & Server Actions",
+      "Admin dashboard & CRUD tooling with live previews",
+      "Transactional email (Resend)",
+      "Technical SEO & structured data",
+      "Custom design systems & motion (GSAP, Motion)",
+    ],
+  },
   {
     slug: "general-goods",
     img: generalStore,
