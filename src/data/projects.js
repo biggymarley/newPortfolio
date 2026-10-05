@@ -10,6 +10,7 @@ import matcha from "../assets/projects/matcha.webp";
 import omart from "../assets/projects/omart.webp";
 import startincub from "../assets/projects/startincub.webp";
 import tazuri from "../assets/projects/tazuri.webp";
+import taghazoutShirt from "../assets/projects/taghazout-shirt.webp";
 
 // Single source of truth for every project shown on the site.
 // `featured: true` marks the ones that appear on the home page.
@@ -20,7 +21,120 @@ import tazuri from "../assets/projects/tazuri.webp";
 // Projects with a `slug` get a dedicated detail page at /projects/:slug
 // (live iframe preview + about + features + skills). Projects without a
 // slug (e.g. GitHub-only repos) keep linking straight to `link`.
+// Optional case-study fields (rendered on the detail page only when present):
+// `repo` (source link), `context` (the problem, in short paragraphs),
+// `highlights` ({ title, body } — problems solved, with the why) and
+// `screenshots` ({ src, alt, caption } — entries with `src: null` are
+// placeholders, shown only in dev).
 export const projects = [
+  {
+    slug: "taghazout-shirt",
+    img: taghazoutShirt,
+    langs: [
+      "Nextjs",
+      "React",
+      "Typescript",
+      "Tailwind css",
+      "Shopify",
+      "Storefront Api",
+      "GraphQL",
+      "Motion",
+      "GSAP",
+      "Lenis",
+      "Radix UI",
+      "vercel",
+    ],
+    title: "TAGHAZOUT SHIRT",
+    disc: "Headless Shopify storefront selling clothing from Taghazout's independent skate, surf and street labels worldwide",
+    link: "https://www.taghazoutshirt.com",
+    repo: "https://github.com/biggymarley/taghazout",
+    featured: true,
+    selfDesigned: true,
+    claudeCode: true,
+    about:
+      "Taghazout Shirt is a stockist storefront that sells clothing from Taghazout's own skate, surf and street labels worldwide — a custom Next.js front end on top of Shopify, with an editorial, motion-led design and a page structure built to be found by Google and quoted by AI answer engines. I did it solo: design direction, front end, commerce integration, SEO, deployment, and the Shopify store setup itself. It's live and in active development.",
+    context: [
+      "Taghazout is a Moroccan surf village with a handful of small independent clothing labels — Taghazout Skatepark, Poponi, Underrated Studio. Most of them could only be bought in person, or through one Instagram account. The site collects them in one place and ships worldwide from Agadir.",
+      "The key decision was positioning: it's a stockist, not a maker. Every product is credited to the label that made it — on the card, on the product page, and in the structured data — and the site never claims to make the clothes. That one rule shaped the data model, the product page and the SEO.",
+      "The design system, \"Anchor Point\", came from researching the real place — blue-and-white houses, cobalt fishing boats, caramel sand, the Anchor Point right-hand wave — and translating it into a dark theme with a single orange accent (#FB5A18). Type is Archivo variable (its width axis pushed to ultra-condensed for display), Geist Sans and Mono, a Sacramento script accent, and Noto Sans Tifinagh for the Amazigh name ⵜⴰⵖⴰⵣⵓⵜ. Nothing in the motion language bounces, and every animation has a prefers-reduced-motion path.",
+    ],
+    highlights: [
+      {
+        title: "Static pages, live cart",
+        body: "The cart lives in an httpOnly cookie, and reading cookies would normally make every page dynamic. I isolated the cart behind a Suspense boundary, so with Next.js 16 partial prerendering every page ships as a static shell and only the cart streams in.",
+      },
+      {
+        title: "Shopify webhooks, verified properly",
+        body: "The HMAC is computed over the raw request body, not re-serialised JSON, which would never match. The comparison is constant-time with a length check first, and unhandled topics get a 200 so Shopify doesn't keep retrying them for two days. Verified events refresh the cached product and collection data.",
+      },
+      {
+        title: "Brand attribution you can trust",
+        body: "Each label is a Shopify collection — its image is the logo, and a navigation menu decides which collections count as brands and in what order, so adding a brand needs no code. A careful fallback means a misconfigured store never credits a product to the wrong label, and the site keeps working before the store is set up.",
+      },
+      {
+        title: "A gallery for mixed photo shapes",
+        body: "Product shots arrive as anything from tall model photos to wide mockups. The gallery fills a 4:5 frame where the photo fits it and letterboxes the rest, so wide mockups don't lose their sleeves. One DOM serves both the mobile and desktop layouts, so no image downloads twice.",
+      },
+      {
+        title: "Accessibility in the details",
+        body: "Focus-trapped dialogs (Radix) for the nav, cart and photo viewer, screen-reader announcements when the cart changes, and marquees that pause on hover and focus and expose each link only once instead of once per repeat.",
+      },
+      {
+        title: "Headless, end to end",
+        body: "The Shopify Online Store theme redirects to the Next.js site with a canonical and noindex, checkout runs on its own subdomain (checkout.taghazoutshirt.com), and the checkout is styled to match the site.",
+      },
+    ],
+    features: [
+      "Shop grid with URL-based filters, with filtered views kept out of the search index",
+      "Product pages with a thumbnail-rail gallery, a full-screen photo viewer (swipe, arrows, keyboard, thumbnails), size picker with sold-out states, and spec tables",
+      "Server-side cart via Server Actions, a slide-out cart drawer, and a one-click \"Buy now\" straight to checkout with just that item — without touching the shopper's bag",
+      "Sticky buy bar that appears once the main buy buttons scroll away and hides near the footer",
+      "\"The maker\" panel on every product page: the label's logo and a link to all its pieces",
+      "Editorial homepage: layered hero collage with scroll parallax and annotated product callouts, full-bleed wordmark band, marquees, and a card-deck intro loader",
+      "SEO and AI-search (GEO): JSON-LD for Product, Offer, Brand, BreadcrumbList, FAQPage, Organization and WebSite; /llms.txt and /llms-full.txt generated from the live catalogue; Markdown versions of product pages",
+      "Google Merchant feed (/feed.xml), a sitemap built from Shopify with real last-modified dates, and dynamic per-product Open Graph images",
+      "Shipping and returns pages with 14-day returns aligned with EU distance-selling rules, and honest empty states instead of an invented rate card, address or review",
+    ],
+    skills: [
+      "Headless commerce (Shopify Storefront API)",
+      "Next.js 16 Cache Components & partial prerendering",
+      "Server Actions, caching & revalidation",
+      "Webhook security (HMAC verification)",
+      "Technical SEO & structured data",
+      "AI-search optimisation (GEO)",
+      "Accessibility (WCAG 2.2)",
+      "Motion design (GSAP, Motion)",
+      "Custom design systems",
+      "Shopify store setup, DNS & Vercel deployment",
+    ],
+    screenshots: [
+      {
+        src: null, // TODO: homepage hero, desktop — shows the design system and motion-led editorial direction
+        alt: "Taghazout Shirt homepage hero on desktop",
+        caption: "The homepage hero: layered collage, annotated label callouts, full-bleed wordmark.",
+      },
+      {
+        src: null, // TODO: product page with gallery + sticky buy bar visible — shows highlights 1 and 4 (and "The maker" panel = 3)
+        alt: "Product page with gallery and sticky buy bar",
+        caption: "Product page: mixed-shape gallery, label credit, sticky buy bar.",
+      },
+      {
+        src: null, // TODO: full-screen photo viewer, ideally a wide mockup letterboxed — shows highlight 4
+        alt: "Full-screen photo viewer",
+        caption: "The full-screen viewer letterboxes wide mockups instead of cropping them.",
+      },
+      {
+        src: null, // TODO: mobile shop grid — shows labels credited on every card + responsive layout
+        alt: "Shop grid on mobile",
+        caption: "Shop grid on mobile, every piece credited to its label.",
+      },
+      {
+        src: null, // TODO: Shopify checkout on checkout.taghazoutshirt.com — shows highlight 6
+        alt: "Checkout styled to match the site",
+        caption: "Shopify checkout on its own subdomain, styled to match.",
+      },
+    ],
+  },
   {
     slug: "poponi",
     img: poponi,

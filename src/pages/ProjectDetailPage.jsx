@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { projects } from "../data/projects";
-import { ArrowUpRight, Check, ClaudeSpark } from "../components/icons";
+import { ArrowUpRight, Check, ClaudeSpark, Github } from "../components/icons";
 import NotFoundPage from "./NotFoundPage";
 
 // Default the live preview to a phone frame when the visitor is on a small screen.
@@ -16,8 +16,24 @@ const ProjectDetailPage = () => {
 
   if (!project) return <NotFoundPage />;
 
-  const { title, disc, link, img, langs, about, features, skills, selfDesigned, claudeCode } =
-    project;
+  const {
+    title,
+    disc,
+    link,
+    repo,
+    img,
+    langs,
+    about,
+    context,
+    highlights,
+    features,
+    skills,
+    screenshots,
+    selfDesigned,
+    claudeCode,
+  } = project;
+  // Screenshots without a `src` are placeholders — visible in dev only.
+  const shots = (screenshots ?? []).filter((shot) => shot.src || import.meta.env.DEV);
   const displayUrl = link.replace(/^https?:\/\//, "").replace(/\/$/, "");
   const isMobileView = view === "mobile";
 
@@ -40,9 +56,16 @@ const ProjectDetailPage = () => {
           </h1>
           <p className="text-fog mt-3 max-w-2xl">{disc}</p>
         </div>
-        <a href={link} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-          visit live site <ArrowUpRight size={16} />
-        </a>
+        <div className="flex flex-wrap gap-3">
+          {repo && (
+            <a href={repo} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+              <Github size={16} /> source code
+            </a>
+          )}
+          <a href={link} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+            visit live site <ArrowUpRight size={16} />
+          </a>
+        </div>
       </div>
 
       {/* live preview — browser chrome around an iframe */}
@@ -165,6 +188,42 @@ const ProjectDetailPage = () => {
             )}
           </div>
 
+          {context && (
+            <div data-aos="fade-up">
+              <h2 className="font-mono text-xl md:text-2xl font-semibold text-white mb-4">
+                <span className="text-accent">#</span>the-context
+              </h2>
+              <div className="space-y-4">
+                {context.map((paragraph) => (
+                  <p key={paragraph} className="text-fog leading-7">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {highlights && (
+            <div data-aos="fade-up">
+              <h2 className="font-mono text-xl md:text-2xl font-semibold text-white mb-4">
+                <span className="text-accent">#</span>problems-solved
+              </h2>
+              <ol className="space-y-6">
+                {highlights.map(({ title: heading, body }, i) => (
+                  <li key={heading} className="flex gap-4">
+                    <span className="font-mono text-sm text-accent mt-0.5 shrink-0">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h3 className="font-mono text-white font-semibold">{heading}</h3>
+                      <p className="text-fog leading-7 mt-1">{body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+
           <div data-aos="fade-up">
             <h2 className="font-mono text-xl md:text-2xl font-semibold text-white mb-4">
               <span className="text-accent">#</span>what-i-built
@@ -178,6 +237,35 @@ const ProjectDetailPage = () => {
               ))}
             </ul>
           </div>
+
+          {shots.length > 0 && (
+            <div data-aos="fade-up">
+              <h2 className="font-mono text-xl md:text-2xl font-semibold text-white mb-4">
+                <span className="text-accent">#</span>screenshots
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-5">
+                {shots.map(({ src, alt, caption }) => (
+                  <figure key={alt}>
+                    {src ? (
+                      <img
+                        src={src}
+                        alt={alt}
+                        loading="lazy"
+                        className="w-full rounded-lg border border-line"
+                      />
+                    ) : (
+                      <div className="aspect-video rounded-lg border border-dashed border-accent/60 bg-accent-soft flex items-center justify-center p-4 text-center font-mono text-xs text-accent">
+                        [PLACEHOLDER — screenshot needed]
+                        <br />
+                        {alt}
+                      </div>
+                    )}
+                    <figcaption className="text-sm text-fog mt-2">{caption}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* sidebar */}
