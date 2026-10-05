@@ -18,4 +18,4 @@ npm run preview  # preview the production build
 - `src/components/` — section components used by the pages
 - `src/assets/` — images imported by the data/components
 
-Deployed on Vercel (SPA rewrites configured in `vercel.json`).
+Deployed on Vercel (SPA rewrites configured in `vercel.json`)..
