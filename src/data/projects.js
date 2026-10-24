@@ -11,6 +11,10 @@ import omart from "../assets/projects/omart.webp";
 import startincub from "../assets/projects/startincub.webp";
 import tazuri from "../assets/projects/tazuri.webp";
 import taghazoutShirt from "../assets/projects/taghazout-shirt.webp";
+import underrated212 from "../assets/projects/underrated212.webp";
+import underrated212Rack from "../assets/projects/underrated212/rack.webp";
+import underrated212ProductView from "../assets/projects/underrated212/product-view.webp";
+import underrated212AdminProduct from "../assets/projects/underrated212/admin-product.webp";
 
 // Single source of truth for every project shown on the site.
 // `featured: true` marks the ones that appear on the home page.
@@ -27,6 +31,125 @@ import taghazoutShirt from "../assets/projects/taghazout-shirt.webp";
 // `screenshots` ({ src, alt, caption } — entries with `src: null` are
 // placeholders, shown only in dev).
 export const projects = [
+  {
+    slug: "underrated212-studio",
+    img: underrated212,
+    langs: [
+      "Nextjs",
+      "React",
+      "Typescript",
+      "Supabase",
+      "PostgreSQL",
+      "Tailwind css",
+      "Motion",
+      "Zustand",
+      "React Hook Form",
+      "Zod",
+      "vercel",
+    ],
+    title: "UNDERRATED212 STUDIO",
+    disc: "Cash-on-delivery streetwear store for a Tamraght print studio, built as clothes hanging on a rail in an underground station",
+    link: "https://underrated-tau.vercel.app/",
+    featured: true,
+    selfDesigned: true,
+    claudeCode: true,
+    about:
+      "UNDERRATED212 STUDIO is the online store for a small streetwear print studio in Tamraght, selling to customers across Morocco with cash on delivery. Instead of a product grid, the garments hang edge-on along a chrome rail under a fluorescent tube; they turn to face you on hover and fly into a full product view. I designed it and built the whole thing solo: the Next.js App Router front end, the Supabase back end (Postgres schema, row-level security, order functions, Storage) and an admin dashboard for products, orders, messages and shipping. It's live and in active development, with a real catalogue and studio photography.",
+    context: [
+      "The studio sells mostly through Instagram and WhatsApp, to customers who expect to pay on delivery rather than by card. So the store has no payment provider and no customer accounts: you order with a name, a Moroccan mobile number, a city and an address, and the studio calls to confirm. That makes the order path the part that has to be trustworthy: prices, stock and delivery fees can't come from the browser.",
+      "The key architecture decision was to put every order write behind Postgres security definer functions with row-level security. Visitors can read the catalogue but can never read or write orders directly; place_order() recomputes prices and shipping, and checks and decrements stock under row locks. The data layer sits behind a Repo interface with two implementations: one on Supabase, and a local JSON \"demo mode\" that follows the same rules, so the whole store runs with no environment variables at all.",
+      "The design direction is an underground station or car park at night: a concrete wall, riveted steel plates with a faint sandblasted noise texture, departure-board FAQ rows and line-coloured signs. Palette: near-black #0d0d0e, concrete #2a2a2c, steel #1a1a1c, off-white #ecebe8, muted #8b8a86, warm lamp light #fff6e0 and a single acid accent #e8ff3a. Type is Anton for display, Geist for body and Geist Mono for signage labels. Motion is physical (springs, the rail sliding in, a liquid dye for colour changes), and every animated piece has a reduced-motion fallback.",
+    ],
+    highlights: [
+      {
+        title: "Tamper-proof cash-on-delivery orders",
+        body: "With no payment provider, the order itself had to be the trust boundary. The checkout validates input with Zod and drops honeypot submissions, then calls a Postgres security definer function, place_order(). It checks the Moroccan phone format, rate-limits to 3 orders per phone per hour, locks each variant FOR UPDATE, decrements stock, and recomputes prices and the city's delivery fee itself; the client only ever sends variant ids and quantities. RLS gives the public no access to orders at all, and an admin-only set_order_status() puts stock back when an order is cancelled or returned, and takes it out again if it's reopened.",
+      },
+      {
+        title: "Liquid dye colour transition",
+        body: "Switching colourway paints the new colour up the garment like dye rising through fabric. Adapted from a reference site's technique: one SVG holds both images, the old one under an inverse mask and the new one under a mask, both cut by the same path, rebuilt every animation frame from two sine waves plus seven randomly delayed drip columns. Both images are decoded first with Image.decode() using the exact URL the browser picked from Next's srcset (via getImageProps), so nothing pops in mid-animation, and the overlay is removed two frames after the new colour is committed underneath.",
+      },
+      {
+        title: "Photosensitivity-safe fluorescent intro",
+        body: "On the first visit per session, the lamp strikes on like a real fluorescent tube, then the rail slides in and the garments drop onto it. A tiny inline script in <head> adds an intro-pending class before first paint, so the rack never flashes up before the intro hides it; it skips other routes, repeat visits and reduced-motion users. The tube's brightness is a raw, fast-flickering CSS variable, but the wall glow and big logo read a ~110 ms low-passed copy, so large areas breathe instead of strobing. The controller survives React StrictMode's double effects, and any click or key skips the intro.",
+      },
+      {
+        title: "Uploads that hang from one hook",
+        body: "Every garment has to hang from the same point on the rail, but uploaded cut-outs come in any size and crop. Before upload, the admin editor finds the image's non-transparent bounds on a canvas and refits the garment onto a 1086×1448 (3:4) frame with the hook pinned 1.5% from the top. The file then goes straight from the browser to Supabase Storage under the admin session and Storage RLS, so large photos never pass through a server action, and the editor warns when a photo has no transparent background.",
+      },
+      {
+        title: "Flat-fee shipping across 173 cities",
+        body: "Per-city fees were tedious to manage, so shipping became two decisions: a set of free cities and one fee for everywhere else. An admin-checked set_shipping() function rewrites every city's price in one transaction, so place_order() and every order total keep working unchanged. One list of 173 cities across all 12 regions feeds the migration, the seed SQL and demo mode, and the checkout city search strips accents (Unicode normalisation) so \"fes\" finds \"Fès\".",
+      },
+      {
+        title: "Product view without a page change",
+        body: "Opening a garment updates the URL to /product/[slug] with history.pushState and morphs it into the detail view with Motion's shared-layout animation, rather than navigating to a new page. The browser back button closes the view, and arrows and swipes switch pieces with replaceState. A deep link renders the same rack already opened on that piece, so shared links, generateMetadata titles and the sitemap all work. On phones the nav slides away while a product is open, so the garment gets the full screen.",
+      },
+    ],
+    features: [
+      "Browse the rack: garments hang edge-on and turn to face you on hover; on mobile it's a swipeable rail where the piece nearest the centre faces forward",
+      "Open a piece to flip it front/back, pick a colour from hanging tags (with the dye transition) and choose from the sizes it's actually made in",
+      "Bag drawer and cash-on-delivery checkout with a searchable list of 173 Moroccan cities, then an order tracking page",
+      "About page with studio photos as platform posters, and a Contact page with a message form, WhatsApp/Instagram/email signs and a FAQ",
+      "Admin: create and edit products, upload images (auto-framed to the rail), and drag to reorder the rail",
+      "Admin: filter orders, change status (with automatic restocking), add notes and export to CSV",
+      "Admin: read and resolve contact messages, and set free cities plus one flat delivery fee",
+      "First-visit entrance: the lamp strikes on, the logo shows, then the rail slides in and the clothes drop on",
+    ],
+    skills: [
+      "Supabase (Postgres, Auth, RLS, Storage)",
+      "Postgres security-definer functions & transactional inventory",
+      "Next.js App Router (server actions, middleware, revalidation)",
+      "Creative front-end motion (Motion, SVG masks, canvas)",
+      "Accessible animation (reduced motion, photosensitivity-safe flicker)",
+      "Custom design systems (CSS tokens, Tailwind v4)",
+      "Cash-on-delivery checkout & order operations",
+      "Admin dashboards & internal tooling",
+      "Technical SEO (metadata, sitemap, robots, OG image)",
+    ],
+    screenshots: [
+      {
+        src: underrated212Rack,
+        alt: "Garments hanging on a chrome rail under a fluorescent tube against a concrete wall",
+        caption: "The rack: the hovered piece turns to face you while the rest hang edge-on.",
+      },
+      {
+        src: underrated212ProductView,
+        alt: "Product view of a stone-washed black t-shirt with a colour tag, sizes and buy buttons",
+        caption: "The product view opens in place: front/back toggle, colour tag, sold-out sizes struck through, cash on delivery.",
+      },
+      {
+        src: underrated212AdminProduct,
+        alt: "Admin product editor with details, a live rack preview and front, back and side images",
+        caption: "The admin product editor: colourways with front, back and rack images, all framed to hang from the same hook.",
+      },
+      {
+        src: null, // TODO: desktop product view (Distressed Painted Tank) mid colour change, sand rising over black — highlight 2
+        alt: "Black tank top being repainted sand from the hem up with a dripping liquid edge",
+        caption: "Switching colourway dyes the new colour up the garment.",
+      },
+      {
+        src: null, // TODO: desktop homepage during the entrance — lamp lit, logo under it, before the rail slides in — highlight 3
+        alt: "Fluorescent tube lit over a concrete wall with the Underrated 212 logo beneath it",
+        caption: "On the first visit the station lamp strikes on before the rail slides in.",
+      },
+      {
+        src: null, // TODO: desktop Contact page — steel form plate, line-coloured signs, departure-board FAQ — design system
+        alt: "Contact page with a riveted steel form panel and station-style contact signs",
+        caption: "The underground-station design system: riveted plates, line-coloured signs and a departure-board FAQ.",
+      },
+      {
+        src: null, // TODO: mobile (~390px) product view — nav hidden, floating ✕, sizes, bottom buy bar — highlight 6
+        alt: "Phone screen showing a tank top full-screen with sizes and a buy bar",
+        caption: "On phones the nav slides away so the product gets the whole screen.",
+      },
+      {
+        src: null, // TODO: admin Settings → Shipping panel — fee box, free-city chips, city list — highlight 5
+        alt: "Admin shipping panel with a delivery fee and Tamraght marked free",
+        caption: "Shipping is two decisions: which cities are free, and one fee for everywhere else.",
+      },
+    ],
+  },
   {
     slug: "taghazout-shirt",
     img: taghazoutShirt,
