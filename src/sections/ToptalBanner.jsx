@@ -10,8 +10,8 @@ const ToptalBanner = () => {
     >
       <ToptalBadge hireUrl={site.toptalHire} />
       <div className="flex-1 text-center md:text-left">
-        <h3 className="text-white font-semibold font-mono text-lg md:text-xl">
-          Verified Toptal talent — top 3%
+        <h3 className="text-white font-semibold tracking-tight text-xl md:text-2xl">
+          Verified Toptal talent, top 3%
         </h3>
         <p className="text-sm md:text-base text-fog mt-3 max-w-xl mx-auto md:mx-0 leading-relaxed">
           I work with clients worldwide through Toptal, the exclusive network of

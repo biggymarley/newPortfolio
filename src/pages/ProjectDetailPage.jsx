@@ -1,12 +1,37 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { projects } from "../data/projects";
-import { ArrowUpRight, Check, ClaudeSpark, Github } from "../components/icons";
+import { ArrowUpRight, Check, ClaudeSpark, Github, GooglePlay } from "../components/icons";
 import NotFoundPage from "./NotFoundPage";
 
 // Default the live preview to a phone frame when the visitor is on a small screen.
 const isSmallScreen = () =>
   typeof window !== "undefined" && window.matchMedia("(max-width: 640px)").matches;
+
+// Mobile apps can't run in an iframe, so they get a swipeable strip of phone screens.
+const AppScreens = ({ title, screens = [], playStore }) => (
+  <div className="mt-10" data-aos="fade-up">
+    <div className="no-scrollbar -mx-5 px-5 md:mx-0 md:px-0 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2">
+      {screens.map(({ src, alt }) => (
+        <img
+          key={alt}
+          src={src}
+          alt={alt}
+          loading="lazy"
+          width="540"
+          height="960"
+          className="snap-start shrink-0 w-[62vw] max-w-[224px] aspect-[9/16] rounded-2xl border border-line object-cover"
+        />
+      ))}
+    </div>
+    <p className="font-mono text-xs text-fog mt-3">
+      {"//"} screens from the {title} Google Play listing, swipe for more.{" "}
+      <a href={playStore} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+        Install it on Android
+      </a>
+    </p>
+  </div>
+);
 
 const ProjectDetailPage = () => {
   const { slug } = useParams();
@@ -31,6 +56,10 @@ const ProjectDetailPage = () => {
     screenshots,
     selfDesigned,
     claudeCode,
+    playStore,
+    icon,
+    appScreens,
+    launch,
   } = project;
   // Screenshots without a `src` are placeholders — visible in dev only.
   const shots = (screenshots ?? []).filter((shot) => shot.src || import.meta.env.DEV);
@@ -38,20 +67,20 @@ const ProjectDetailPage = () => {
   const isMobileView = view === "mobile";
 
   return (
-    <section className="container-site pt-28 pb-20">
+    <section className="container-site pt-24 md:pt-28 pb-20">
       {/* breadcrumb */}
       <Link
-        to="/projects"
-        className="font-mono text-sm text-fog hover:text-accent transition-colors inline-flex items-center gap-2"
+        to={{ pathname: "/", hash: "#work" }}
+        className="font-mono text-sm text-fog hover:text-accent transition-colors inline-flex items-center gap-2 min-h-[44px]"
       >
-        <span className="text-accent">$</span> cd ../projects
+        <span className="text-accent">←</span> all projects
       </Link>
 
       {/* header */}
       <div className="mt-6 flex flex-wrap items-start justify-between gap-6" data-aos="fade-up">
         <div>
-          <h1 className="font-mono text-3xl md:text-4xl font-bold text-white">
-            <span className="text-accent">/</span>
+          <h1 className="flex items-center gap-4 text-3xl md:text-5xl font-semibold tracking-tight text-white">
+            {icon && <img src={icon} alt="" width="64" height="64" className="w-12 h-12 md:w-16 md:h-16 rounded-2xl" />}
             {title}
           </h1>
           <p className="text-fog mt-3 max-w-2xl">{disc}</p>
@@ -63,111 +92,125 @@ const ProjectDetailPage = () => {
             </a>
           )}
           <a href={link} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-            visit live site <ArrowUpRight size={16} />
+            {playStore ? (
+              <>
+                <GooglePlay size={16} /> get it on Google Play
+              </>
+            ) : (
+              <>
+                visit live site <ArrowUpRight size={16} />
+              </>
+            )}
           </a>
         </div>
       </div>
 
-      {/* live preview — browser chrome around an iframe */}
-      <div
-        className="mt-10 rounded-xl border border-line bg-night-deep/80 overflow-hidden"
-        data-aos="fade-up"
-      >
-        {/* title bar */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-line bg-night-raised/60">
-          <span className="w-3 h-3 rounded-full bg-[#ff5f57]"></span>
-          <span className="w-3 h-3 rounded-full bg-[#febc2e]"></span>
-          <span className="w-3 h-3 rounded-full bg-[#28c840]"></span>
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-3 flex-1 min-w-0 truncate font-mono text-xs text-fog bg-night-deep/80 border border-line rounded px-3 py-1 hover:text-accent transition-colors"
-          >
-            {displayUrl}
-          </a>
-          {/* desktop / mobile toggle */}
-          <div className="flex items-center rounded border border-line overflow-hidden font-mono text-xs">
-            <button
-              type="button"
-              onClick={() => setView("desktop")}
-              aria-pressed={!isMobileView}
-              className={`px-2.5 py-1 transition-colors ${
-                !isMobileView ? "bg-accent-soft text-accent" : "text-fog hover:text-white"
-              }`}
-            >
-              desktop
-            </button>
-            <button
-              type="button"
-              onClick={() => setView("mobile")}
-              aria-pressed={isMobileView}
-              className={`px-2.5 py-1 border-l border-line transition-colors ${
-                isMobileView ? "bg-accent-soft text-accent" : "text-fog hover:text-white"
-              }`}
-            >
-              mobile
-            </button>
-          </div>
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Open ${title} in a new tab`}
-            className="text-fog hover:text-accent transition-colors"
-          >
-            <ArrowUpRight size={16} />
-          </a>
-        </div>
-        {/* frame */}
+      {playStore ? (
+        <AppScreens title={title} screens={appScreens} playStore={playStore} />
+      ) : (
+        <>
+        {/* live preview — browser chrome around an iframe */}
         <div
-          className={
-            isMobileView
-              ? "relative bg-night-deep flex justify-center py-6 px-4"
-              : "relative aspect-video bg-night-deep"
-          }
+          className="mt-10 rounded-xl border border-line bg-night-deep/80 overflow-hidden"
+          data-aos="fade-up"
         >
-          {!frameLoaded && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-              <img
-                src={img}
-                alt={title}
-                className="absolute inset-0 w-full h-full object-cover object-top opacity-20"
-              />
-              <span className="relative font-mono text-sm text-fog animate-pulse">
-                loading live preview…
-              </span>
+          {/* title bar */}
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-line bg-night-raised/60">
+            <span className="w-3 h-3 rounded-full bg-[#ff5f57]"></span>
+            <span className="w-3 h-3 rounded-full bg-[#febc2e]"></span>
+            <span className="w-3 h-3 rounded-full bg-[#28c840]"></span>
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-3 flex-1 min-w-0 truncate font-mono text-xs text-fog bg-night-deep/80 border border-line rounded px-3 py-1 hover:text-accent transition-colors"
+            >
+              {displayUrl}
+            </a>
+            {/* desktop / mobile toggle */}
+            <div className="flex items-center rounded border border-line overflow-hidden font-mono text-xs">
+              <button
+                type="button"
+                onClick={() => setView("desktop")}
+                aria-pressed={!isMobileView}
+                className={`px-2.5 py-1 transition-colors ${
+                  !isMobileView ? "bg-accent-soft text-accent" : "text-fog hover:text-white"
+                }`}
+              >
+                desktop
+              </button>
+              <button
+                type="button"
+                onClick={() => setView("mobile")}
+                aria-pressed={isMobileView}
+                className={`px-2.5 py-1 border-l border-line transition-colors ${
+                  isMobileView ? "bg-accent-soft text-accent" : "text-fog hover:text-white"
+                }`}
+              >
+                mobile
+              </button>
             </div>
-          )}
-          {isMobileView ? (
-            <div className="relative w-full max-w-[375px] h-[70vh] max-h-[720px] rounded-[2rem] border-4 border-line bg-night-deep overflow-hidden shadow-glow">
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${title} in a new tab`}
+              className="text-fog hover:text-accent transition-colors"
+            >
+              <ArrowUpRight size={16} />
+            </a>
+          </div>
+          {/* frame */}
+          <div
+            className={
+              isMobileView
+                ? "relative bg-night-deep flex justify-center py-6 px-4"
+                : "relative aspect-video bg-night-deep"
+            }
+          >
+            {!frameLoaded && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                <img
+                  src={img}
+                  alt={title}
+                  className="absolute inset-0 w-full h-full object-cover object-top opacity-20"
+                />
+                <span className="relative font-mono text-sm text-fog animate-pulse">
+                  loading live preview…
+                </span>
+              </div>
+            )}
+            {isMobileView ? (
+              <div className="relative w-full max-w-[375px] h-[70vh] max-h-[720px] rounded-[2rem] border-4 border-line bg-night-deep overflow-hidden shadow-glow">
+                <iframe
+                  src={link}
+                  title={`${title} — live mobile preview`}
+                  loading="lazy"
+                  onLoad={() => setFrameLoaded(true)}
+                  className="w-full h-full border-0"
+                  allow="fullscreen"
+                />
+              </div>
+            ) : (
               <iframe
                 src={link}
-                title={`${title} — live mobile preview`}
+                title={`${title} — live preview`}
                 loading="lazy"
                 onLoad={() => setFrameLoaded(true)}
-                className="w-full h-full border-0"
+                className="relative w-full h-full border-0"
                 allow="fullscreen"
               />
-            </div>
-          ) : (
-            <iframe
-              src={link}
-              title={`${title} — live preview`}
-              loading="lazy"
-              onLoad={() => setFrameLoaded(true)}
-              className="relative w-full h-full border-0"
-              allow="fullscreen"
-            />
-          )}
+            )}
+          </div>
         </div>
-      </div>
-      <p className="font-mono text-xs text-fog mt-3">
-        {"//"} this is the real website running in an embedded frame — if it doesn't load,{" "}
-        <a href={link} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-          open it in a new tab
-        </a>
-      </p>
+        <p className="font-mono text-xs text-fog mt-3">
+          {"//"} this is the real website running in an embedded frame — if it doesn't load,{" "}
+          <a href={link} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+            open it in a new tab
+          </a>
+        </p>
+        </>
+      )}
 
       {/* details */}
       <div className="mt-14 grid lg:grid-cols-3 gap-10">
@@ -237,6 +280,23 @@ const ProjectDetailPage = () => {
               ))}
             </ul>
           </div>
+
+          {launch && (
+            <div data-aos="fade-up">
+              <h2 className="font-mono text-xl md:text-2xl font-semibold text-white mb-2">
+                <span className="text-accent">#</span>launch-and-growth
+              </h2>
+              <p className="text-fog leading-7 mb-4">Beyond the code, I set up the channels that bring customers in.</p>
+              <ul className="space-y-3">
+                {launch.items.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-fog leading-6">
+                    <Check size={16} className="shrink-0 mt-1 text-emerald-400" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {shots.length > 0 && (
             <div data-aos="fade-up">
@@ -309,7 +369,7 @@ const ProjectDetailPage = () => {
             <p className="text-sm text-fog mb-4">
               I can build something like this for you.
             </p>
-            <Link to="/contact" className="btn btn-outline w-full">
+            <Link to={{ pathname: "/", hash: "#contact" }} className="btn btn-primary w-full">
               get in touch
             </Link>
           </div>

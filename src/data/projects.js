@@ -12,12 +12,25 @@ import startincub from "../assets/projects/startincub.webp";
 import tazuri from "../assets/projects/tazuri.webp";
 import taghazoutShirt from "../assets/projects/taghazout-shirt.webp";
 import underrated212 from "../assets/projects/underrated212.webp";
+import yallah from "../assets/projects/yallah.webp";
+import tamraghtDays from "../assets/projects/tamraght-days.webp";
+import yallahIcon from "../assets/projects/yallah/icon.webp";
+import yallahScreen1 from "../assets/projects/yallah/screen-1.webp";
+import yallahScreen2 from "../assets/projects/yallah/screen-2.webp";
+import yallahScreen3 from "../assets/projects/yallah/screen-3.webp";
+import yallahScreen4 from "../assets/projects/yallah/screen-4.webp";
+import yallahScreen5 from "../assets/projects/yallah/screen-5.webp";
+import yallahScreen6 from "../assets/projects/yallah/screen-6.webp";
+import yallahScreen7 from "../assets/projects/yallah/screen-7.webp";
+import yallahScreen8 from "../assets/projects/yallah/screen-8.webp";
 import underrated212Rack from "../assets/projects/underrated212/rack.webp";
 import underrated212ProductView from "../assets/projects/underrated212/product-view.webp";
 import underrated212AdminProduct from "../assets/projects/underrated212/admin-product.webp";
 
 // Single source of truth for every project shown on the site.
-// `featured: true` marks the ones that appear on the home page.
+// `spotlight: true` marks the ones shown as large rows under "Selected work";
+// everything else goes in the filterable grid below it.
+// `category` drives the filter tabs on the home page (see `categories` below).
 // `claudeCode: true` marks projects built using Claude Code — cards and the
 // detail page show a Claude badge for these.
 // `selfDesigned: true` marks projects I designed myself (mostly designing
@@ -30,6 +43,10 @@ import underrated212AdminProduct from "../assets/projects/underrated212/admin-pr
 // `highlights` ({ title, body } — problems solved, with the why) and
 // `screenshots` ({ src, alt, caption } — entries with `src: null` are
 // placeholders, shown only in dev).
+// Mobile apps set `playStore` (store URL), `icon` and `appScreens` (phone
+// screenshots): the detail page shows the screens instead of a live iframe.
+// `launch` ({ tags, items }) covers work beyond the code: Merchant Center,
+// Google Business Profile, social accounts. Tags show on the home page row.
 export const projects = [
   {
     slug: "underrated212-studio",
@@ -48,9 +65,10 @@ export const projects = [
       "vercel",
     ],
     title: "UNDERRATED212 STUDIO",
+    spotlight: true,
+    category: "commerce",
     disc: "Cash-on-delivery streetwear store for a Tamraght print studio, built as clothes hanging on a rail in an underground station",
     link: "https://underrated-tau.vercel.app/",
-    featured: true,
     selfDesigned: true,
     claudeCode: true,
     about:
@@ -151,6 +169,88 @@ export const projects = [
     ],
   },
   {
+    slug: "yallah",
+    img: yallah,
+    icon: yallahIcon,
+    langs: [
+      "React Native",
+      "Expo",
+      "Typescript",
+      "Expo Router",
+      "Supabase",
+      "PostgreSQL",
+      "Reanimated",
+      "RevenueCat",
+      "Sentry",
+      "EAS",
+    ],
+    title: "Yallah",
+    category: "mobile",
+    spotlight: true,
+    disc: "Moroccan Darija learning app, published on Google Play, with lessons, community word lists, leagues and a mascot you dress up",
+    link: "https://play.google.com/store/apps/details?id=com.yallah.darija",
+    playStore: "https://play.google.com/store/apps/details?id=com.yallah.darija",
+    claudeCode: true,
+    about:
+      "Yallah is a mobile app for learning Moroccan Darija, the dialect around 40 million people speak every day and most language apps skip in favour of Modern Standard Arabic. I built it solo in React Native with Expo and a Supabase back end, and published it on Google Play: structured lessons with four exercise types, community word lists with recorded audio, three-round quizzes, weekly leagues, and Atay, a tea-glass mascot you dress up with coins earned from learning.",
+    context: [
+      "Darija is spoken, not written in any standard way: people text it in Latin letters with numbers (7 for ح, 9 for ق) or in Arabic script. So every word in the app carries both spellings, and a setting switches between Latin, Arabic or both.",
+      "Because the course alone can't cover how Darija is really spoken, the community is part of the curriculum: anyone can build a word list, record their own pronunciation for each word and publish it, and every list becomes a playable quiz.",
+    ],
+    highlights: [
+      {
+        title: "Shipped to Google Play",
+        body: "Built and released with EAS: production builds with auto-incrementing version codes, submitted to the Play Console through a service account. Expo Updates delivers OTA fixes without a store review, and a min_version row in Supabase can block outdated builds with a force-update screen that deep-links to the store.",
+      },
+      {
+        title: "A lesson engine with four exercise types",
+        body: "Each lesson runs listen-and-match, build-the-sentence from word tiles, speak-it with voice recording, and pairs matching, with hearts, XP and coin rewards. Units unlock in order on an SVG learning path, and progress is saved so you resume exactly where you left off.",
+      },
+      {
+        title: "Community lists with real voices",
+        body: "Learners record pronunciation per word with expo-audio; recordings upload to Supabase Storage and play back on the list and in quizzes. Lists can be filtered by hot, new, played, liked and mine, with optimistic likes.",
+      },
+      {
+        title: "Leagues, coins and a mascot",
+        body: "The Tamraght League ranks everyone by quiz score or by words contributed, with a top-three podium. Drahem coins from lessons and quizzes buy 50+ outfits and moods for Atay in the Souk, and Atay appears on leaderboards, lists and quizzes.",
+      },
+      {
+        title: "A guided first run",
+        body: "A 10-step onboarding tour measures real element positions on screen and cuts a spotlight around each one, with Atay explaining the step. It can push to other tabs mid-tour and be replayed from Settings.",
+      },
+    ],
+    features: [
+      "Full Darija course: units and lessons on a visual learning path, locked until the previous unit is complete",
+      "Four lesson exercises: listen & match, build it, speak it, pairs",
+      "Three-round quizzes on any word list: flash cards, multiple choice, then spelling with letter tiles",
+      "Create and publish word lists with recorded audio for each word; save words to favourites and practise them",
+      "Tamraght League leaderboards (scores and contributors) with a podium",
+      "Souk shop with 50+ outfits and moods for the Atay mascot, paid with in-app Drahem coins",
+      "Sign in with username or email, guest mode, password reset and in-app account deletion",
+      "Latin / Arabic / both script setting, OTA updates and a force-update gate",
+    ],
+    skills: [
+      "React Native & Expo (SDK 54, Expo Router)",
+      "Publishing to Google Play (EAS Build & Submit)",
+      "OTA updates & version gating",
+      "Supabase (Postgres, Auth, Storage)",
+      "Audio recording & playback",
+      "Gamification & retention design",
+      "In-app purchases (RevenueCat)",
+      "Crash reporting (Sentry)",
+    ],
+    appScreens: [
+      { src: yallahScreen1, alt: "Community word lists with Hot, New, Played, Liked and Mine filters" },
+      { src: yallahScreen2, alt: "A word list of professions in Darija with English translations" },
+      { src: yallahScreen3, alt: "Creating a new word list and recording audio for each word" },
+      { src: yallahScreen4, alt: "Publishing a word list to the community" },
+      { src: yallahScreen5, alt: "Tamraght League leaderboard with a top-three podium" },
+      { src: yallahScreen6, alt: "Contributors leaderboard ranked by words added" },
+      { src: yallahScreen7, alt: "The Souk shop with outfits for the Atay mascot" },
+      { src: yallahScreen8, alt: "Profile with lists, words, likes and quiz scores" },
+    ],
+  },
+  {
     slug: "taghazout-shirt",
     img: taghazoutShirt,
     langs: [
@@ -168,10 +268,11 @@ export const projects = [
       "vercel",
     ],
     title: "TAGHAZOUT SHIRT",
+    spotlight: true,
+    category: "commerce",
     disc: "Headless Shopify storefront selling clothing from Taghazout's independent skate, surf and street labels worldwide",
     link: "https://www.taghazoutshirt.com",
     repo: "https://github.com/biggymarley/taghazout",
-    featured: true,
     selfDesigned: true,
     claudeCode: true,
     about:
@@ -207,6 +308,14 @@ export const projects = [
         body: "The Shopify Online Store theme redirects to the Next.js site with a canonical and noindex, checkout runs on its own subdomain (checkout.taghazoutshirt.com), and the checkout is styled to match the site.",
       },
     ],
+    launch: {
+      tags: ["Google Shopping", "Google Business Profile", "Instagram"],
+      items: [
+        "Listed the catalogue on Google Merchant Center, so products show up in Google Shopping and free product listings",
+        "Built the Google Business Profile, so the store appears on Google Search and Maps",
+        "Set up and grew the Instagram account to bring customers to the store",
+      ],
+    },
     features: [
       "Shop grid with URL-based filters, with filtered views kept out of the search index",
       "Product pages with a thumbnail-rail gallery, a full-screen photo viewer (swipe, arrows, keyboard, thumbnails), size picker with sold-out states, and spec tables",
@@ -219,6 +328,8 @@ export const projects = [
       "Shipping and returns pages with 14-day returns aligned with EU distance-selling rules, and honest empty states instead of an invented rate card, address or review",
     ],
     skills: [
+      "Google Merchant Center & Business Profile",
+      "Instagram setup & growth",
       "Headless commerce (Shopify Storefront API)",
       "Next.js 16 Cache Components & partial prerendering",
       "Server Actions, caching & revalidation",
@@ -259,6 +370,54 @@ export const projects = [
     ],
   },
   {
+    slug: "tamraght-days",
+    img: tamraghtDays,
+    langs: ["Nextjs", "React", "Tailwind css", "Lenis", "JSON-LD", "vercel"],
+    title: "Tamraght Days",
+    category: "platform",
+    spotlight: true,
+    claudeCode: true,
+    disc: "Locally owned booking platform that connects visitors with Tamraght's surf coaches, guides, drivers and rentals, booked on WhatsApp",
+    link: "https://www.tamraghtdays.com/",
+    about:
+      "Tamraght Days is a booking platform made by locals from Tamraght, the surf village next to Taghazout, to bring local services closer to the foreigners who visit every week. Visitors browse activities, all-inclusive packs, lessons with named local coaches, airport rides and rentals, then book in a minute and get picked up at their door. Every request lands on WhatsApp, so local businesses get bookings with no app or dashboard to learn, and the money stays with them instead of a platform owned abroad.",
+    context: [
+      "Many booking sites in the area are run from abroad: they list the neighbours' surf schools, guesthouses and drivers and the profit leaves Morocco. Tamraght Days is the opposite pitch, Moroccan-owned and made by locals, and the site says so plainly, with an interactive \"where does your dirham go?\" comparison.",
+      "The audience is travellers on their phones, often already in town. So booking is a short form (day, group size, pick-up spot, level) with a live total, no account and no payment upfront; the request goes to WhatsApp and the crew confirms within minutes.",
+    ],
+    highlights: [
+      {
+        title: "Booking without accounts or payments",
+        body: "Each activity has a booking panel that prices the trip as you change the day, time, group size and pick-up spot, then sends the request to WhatsApp. Pay on the day, free cancellation up to 24 hours before, and a 20% deposit only for packs.",
+      },
+      {
+        title: "Onboarding local businesses",
+        body: "A For local businesses page lets surf schools, drivers, rentals and guesthouses join with two fields that open a prefilled WhatsApp message, plus a checklist of what to send for their business type. The team then writes and designs their listing.",
+      },
+      {
+        title: "Built to be found",
+        body: "Statically prerendered Next.js pages on Vercel, an 88-URL sitemap covering every activity and vibe page, and JSON-LD for the business, its location and opening hours, and the FAQ.",
+      },
+    ],
+    features: [
+      "Activities catalogue with 39 experiences across 11 vibes: surf, yoga, skate, valleys, quads, camels, dunes, horses, hammam, cooking and local life",
+      "Activity pages with an at-a-glance summary, a step-by-step \"your day\", what's included, what to bring and cancellation terms",
+      "All-inclusive packs (surf camps, surf & wellness, adventure trips, long stays) with stay, meals, airport pick-up and activities",
+      "Services: lessons with named local coaches, airport transfers and a fixed-price rides table, daily surf shuttle and a rental shack delivered to your door",
+      "\"Can't decide?\" picker that suggests three activities from two quick questions",
+      "Booking form with a live total, sent straight to WhatsApp",
+      "For local businesses page with a prefilled WhatsApp onboarding flow",
+    ],
+    skills: [
+      "Next.js App Router & static prerendering",
+      "Booking flow UX (WhatsApp-first)",
+      "Two-sided marketplace thinking",
+      "Technical SEO & structured data",
+      "Mobile-first design",
+      "Smooth scroll & motion (Lenis)",
+    ],
+  },
+  {
     slug: "poponi",
     img: poponi,
     langs: [
@@ -273,13 +432,21 @@ export const projects = [
       "vercel",
     ],
     title: "POPONI",
+    category: "commerce",
     disc: "Bold streetwear storefront backed by a custom, expert-level admin dashboard a non-technical owner runs entirely on their own",
     link: "https://www.poponi.shop",
-    featured: true,
     selfDesigned: true,
     claudeCode: true,
     about:
       "POPONI is a full-stack e-commerce platform for a one-person Moroccan streetwear studio: a loud, animated public storefront backed by a bespoke admin dashboard that lets a non-technical owner run the entire business — catalog, orders, custom requests, site media, and content — with no code and no third-party CMS. The public site reads live from the database and the admin writes to it, so changing a product, price, video, or homepage image is instantly live. It runs a real commerce loop — cart → checkout → server-priced orders → branded transactional email — with cash-on-delivery and prepaid options, and prices are authoritative in the database so the client can never dictate a total.",
+    launch: {
+      tags: ["Google Shopping", "Google Business Profile", "Instagram"],
+      items: [
+        "Listed the catalogue on Google Merchant Center, so products show up in Google Shopping and free product listings",
+        "Built the Google Business Profile, so the store appears on Google Search and Maps",
+        "Set up and grew the Instagram account to bring customers to the store",
+      ],
+    },
     features: [
       "Custom storefront + custom admin — no Shopify, no headless CMS; everything is bespoke and owned",
       "Server-first data flow: Server Components read Postgres, every mutation is a Server Action guarded by requireAdmin()",
@@ -291,6 +458,8 @@ export const projects = [
       "SEO throughout: dynamic sitemap/robots/manifest, Open Graph image generation, and JSON-LD structured data",
     ],
     skills: [
+      "Google Merchant Center & Business Profile",
+      "Instagram setup & growth",
       "Full-stack e-commerce architecture",
       "Supabase (Postgres, Auth, RLS, Storage, RPC)",
       "Database-authoritative pricing (SECURITY DEFINER)",
@@ -316,9 +485,9 @@ export const projects = [
       "vercel",
     ],
     title: "General Goods Co.",
+    category: "commerce",
     disc: "Outdoor gear ecommerce store with a full admin dashboard",
     link: "https://general-store-peach.vercel.app/",
-    featured: true,
     selfDesigned: true,
     claudeCode: true,
     about:
@@ -347,9 +516,10 @@ export const projects = [
     img: bunk,
     langs: ["Nextjs", "Typescript", "Supabase", "Realtime chat", "vercel"],
     title: "Bunk",
+    spotlight: true,
+    category: "platform",
     disc: "Work-for-stay platform — hostels post volunteer gigs, travelers trade a few hours for a free bed",
     link: "https://www.bunk.surf/",
-    featured: true,
     selfDesigned: true,
     claudeCode: true,
     about:
@@ -389,9 +559,9 @@ export const projects = [
       "vercel",
     ],
     title: "Bigflix V2",
+    category: "platform",
     disc: "Streaming your favorite movie/show",
     link: "https://bigflixv2.vercel.app/",
-    featured: true,
     selfDesigned: true,
     claudeCode: true,
     about:
@@ -433,9 +603,10 @@ export const projects = [
       "vercel",
     ],
     title: "Tazuri Surf House",
+    spotlight: true,
+    category: "platform",
     disc: "Bilingual booking site for a Moroccan surf hostel, with a self-service admin dashboard and an AI blog writer",
     link: "https://tazurihouse.com",
-    featured: true,
     selfDesigned: true,
     claudeCode: true,
     about:
@@ -468,9 +639,9 @@ export const projects = [
     img: omart,
     langs: ["Nextjs", "Typescript", "tailwind css", "Shopify", "Storefront Api", "vercel"],
     title: "Omart.",
+    category: "commerce",
     disc: "Ecommerce Website Powered by Shopify Storefront API",
     link: "https://omart-strings.vercel.app/",
-    featured: true,
     selfDesigned: true,
     about:
       "Omart is a headless ecommerce storefront: the shop is managed in Shopify, but the entire customer-facing experience is a custom Next.js app talking to the Shopify Storefront API. That means full design freedom on the frontend while keeping Shopify's battle-tested product, cart, and checkout infrastructure underneath.",
@@ -495,9 +666,9 @@ export const projects = [
     img: chillcloud,
     langs: ["React", "javascript", "tailwind css", "vite", "firebase", "100ms", "vercel"],
     title: "ChillCloud",
+    category: "platform",
     disc: "Discord like app",
     link: "https://cloudchill.vercel.app/",
-    featured: true,
     selfDesigned: true,
     about:
       "ChillCloud is a Discord-style community app where people connect, chat, and hang out together. It combines Firebase for auth and realtime messaging with 100ms for live audio/video rooms — a full realtime communication stack running in the browser.",
@@ -521,9 +692,9 @@ export const projects = [
     img: bigflix,
     langs: ["React", "Material UI", "javascript", "css", "vite", "vercel"],
     title: "Bigflix",
+    category: "early",
     disc: "Netflix like app",
     link: "https://bigflix-sooty.vercel.app/discover/movies",
-    featured: true,
     selfDesigned: true,
     about:
       "Bigflix is the first iteration of my Netflix-style app — a React single-page application for discovering movies and shows, built with Material UI. It laid the groundwork that later became Bigflix V2, and shows the same product evolving across two tech stacks.",
@@ -545,6 +716,7 @@ export const projects = [
     img: startincub,
     langs: ["React", "Material UI", "javascript", "css", "create-react-app"],
     title: "Startincub",
+    category: "early",
     disc: "Startups Incubation Application",
     link: "https://biggymarley.github.io/Project/#/",
     selfDesigned: true,
@@ -562,6 +734,7 @@ export const projects = [
     img: matcha,
     langs: ["React", "Material UI", "javascript", "css", "create-react-app"],
     title: "Matcha",
+    category: "early",
     disc: "Tinder like app",
     link: "https://biggymarley.github.io/TinderClonePreview/",
     about:
@@ -578,6 +751,7 @@ export const projects = [
     img: bike,
     langs: ["React", "Material UI", "javascript", "css", "vite", "vercel"],
     title: "Bike Rental App",
+    category: "early",
     disc: "Bike Rental App",
     link: "https://bikerental.vercel.app/",
     selfDesigned: true,
@@ -595,6 +769,7 @@ export const projects = [
     img: ai,
     langs: ["React", "TailwinCss", "javascript", "css", "vite", "vercel"],
     title: "Landing page",
+    category: "early",
     disc: "Landing page for ai project",
     link: "https://obi-landing.vercel.app/",
     selfDesigned: true,
@@ -611,6 +786,7 @@ export const projects = [
     img: "https://camo.githubusercontent.com/61ea9e91a74c24d88e2bf28fbf4ea3cee133e9365dcf332e96d40af46cd90734/68747470733a2f2f626173686c6f676f2e636f6d2f696d672f73796d626f6c2f6a70672f66756c6c5f636f6c6f7265645f6c696768742e6a7067",
     langs: ["C", "Unix Shell"],
     title: "Unix Shell Implementation",
+    category: "systems",
     disc: "Unix Shell Implementation",
     link: "https://github.com/biggymarley/42SH",
   },
@@ -618,12 +794,23 @@ export const projects = [
     img: "https://biggymarley.github.io/myPortfolio/static/media/libft.8948aa24978189644e2c.png",
     langs: ["C", "Terminal"],
     title: "C Standard Library",
+    category: "systems",
     disc: "C Standard Library",
     link: "https://github.com/biggymarley/libft",
   },
 ];
 
-export const featuredProjects = projects.filter((project) => project.featured);
+export const categories = [
+  { id: "all", label: "All" },
+  { id: "commerce", label: "E-commerce" },
+  { id: "platform", label: "Platforms" },
+  { id: "mobile", label: "Mobile apps" },
+  { id: "early", label: "Early work" },
+  { id: "systems", label: "Systems / C" },
+];
+
+export const spotlightProjects = projects.filter((project) => project.spotlight);
+export const moreProjects = projects.filter((project) => !project.spotlight);
 
 export const smallProjects = [
   {

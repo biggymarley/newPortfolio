@@ -5,6 +5,9 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* anchor targets land below the fixed navbar */
+    scroll-padding-top: 4.5rem;
+    -webkit-tap-highlight-color: transparent;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -54,7 +57,7 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 font-mono text-sm font-medium px-5 py-2.5 rounded-md border transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 text-sm font-medium px-5 py-2.5 min-h-[44px] rounded-lg border transition-all duration-200 active:scale-[0.98];
   }
 
   .btn-primary {
@@ -63,6 +66,30 @@
 
   .btn-outline {
     @apply text-white border-line hover:border-accent hover:bg-accent-soft;
+  }
+
+  .section {
+    @apply container-site py-16 md:py-28;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-accent;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-semibold tracking-tight text-white mt-3;
+  }
+
+  .section-lead {
+    @apply text-fog leading-relaxed mt-4 max-w-2xl;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   .chip {

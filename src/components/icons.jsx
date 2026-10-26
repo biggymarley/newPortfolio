@@ -78,3 +78,62 @@ export const Github = ({ size = 18, className = "" }) => (
     <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3" />
   </svg>
 );
+
+export const ArrowDown = ({ size = 18, className = "" }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} className={className} {...base} aria-hidden="true">
+    <path d="M12 5v14M5 12l7 7 7-7" />
+  </svg>
+);
+
+export const ArrowUp = ({ size = 18, className = "" }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} className={className} {...base} aria-hidden="true">
+    <path d="M12 19V5M5 12l7-7 7 7" />
+  </svg>
+);
+
+export const MapPin = ({ size = 18, className = "" }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} className={className} {...base} aria-hidden="true">
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+export const Close = ({ size = 18, className = "" }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} className={className} {...base} aria-hidden="true">
+    <path d="M18 6 6 18M6 6l12 12" />
+  </svg>
+);
+
+export const Menu = ({ size = 18, className = "" }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} className={className} {...base} aria-hidden="true">
+    <path d="M4 7h16M4 12h16M10 17h10" />
+  </svg>
+);
+
+export const Store = ({ size = 18, className = "" }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} className={className} {...base} aria-hidden="true">
+    <path d="M3 9 4.5 4h15L21 9M3 9v11h18V9M3 9h18M9 20v-6h6v6" />
+  </svg>
+);
+
+export const Layers = ({ size = 18, className = "" }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} className={className} {...base} aria-hidden="true">
+    <path d="m12 2 10 5-10 5L2 7l10-5Z" />
+    <path d="m2 12 10 5 10-5M2 17l10 5 10-5" />
+  </svg>
+);
+
+export const PenTool = ({ size = 18, className = "" }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} className={className} {...base} aria-hidden="true">
+    <path d="m12 19 7-7 3 3-7 7-3-3Z" />
+    <path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5ZM2 2l7.6 7.6" />
+    <circle cx="11" cy="11" r="2" />
+  </svg>
+);
+
+// Google Play triangle mark, single colour.
+export const GooglePlay = ({ size = 18, className = "" }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} className={className} fill="currentColor" aria-hidden="true">
+    <path d="M3.6 1.8a1.5 1.5 0 0 0-.6 1.2v18a1.5 1.5 0 0 0 .6 1.2l10.1-10.2L3.6 1.8Zm11.5 11.6 2.6 2.6-11.9 6.8 9.3-9.4Zm3.9-3.6 3 1.7c1 .6 1 1.9 0 2.5l-3 1.7-2.9-2.9 2.9-3Zm-13.2-7.6L17.7 9l-2.6 2.6-9.3-9.4Z" />
+  </svg>
+);

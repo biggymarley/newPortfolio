@@ -1,23 +1,22 @@
-import SectionHeading from "../components/SectionHeading";
 import { skillGroups } from "../data/skills";
 
 const SkillsSection = () => {
   return (
-    <section className="container-site py-16">
-      <SectionHeading title="skills" />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <section id="skills" className="section">
+      <div className="max-w-2xl" data-aos="fade-up">
+        <p className="eyebrow">Skills</p>
+        <h2 className="section-title">The stack I ship with</h2>
+      </div>
+
+      <div className="mt-12 rounded-xl border border-line divide-y divide-line overflow-hidden" data-aos="fade-up">
         {skillGroups.map(({ title, languages }) => (
-          <div
-            key={title}
-            data-aos="fade-up"
-            className="rounded-lg border border-line bg-night-raised/50 transition-colors duration-300 hover:border-accent/40"
-          >
-            <h3 className="font-mono font-semibold text-white text-sm px-4 py-3 border-b border-line">
+          <div key={title} className="grid md:grid-cols-12 gap-3 md:gap-6 p-5 md:p-6 bg-night-raised/30">
+            <h3 className="md:col-span-3 font-mono text-sm text-white">
               <span className="text-accent">&gt;</span> {title}
             </h3>
-            <div className="flex flex-wrap gap-1.5 p-4">
+            <div className="md:col-span-9 flex flex-wrap gap-1.5">
               {languages.map((lang) => (
-                <span key={lang} className="chip">
+                <span key={lang} className="chip !text-[13px] !px-2.5 !py-1">
                   {lang}
                 </span>
               ))}

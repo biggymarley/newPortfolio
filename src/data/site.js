@@ -1,7 +1,7 @@
 // Personal info used across the site — edit here, not in components.
 export const site = {
   name: "Ayoub Faragi",
-  role: "Musician & full-stack developer",
+  role: "Full-stack developer",
   location: "Morocco",
   email: "faragiayoubdev@gmail.com",
   discord: "biggyrr",
@@ -16,11 +16,10 @@ export const site = {
   bio: [
     "Hello, I'm Ayoub!",
     "I'm a full-stack developer with over five years of experience building responsive web and mobile applications. I work mainly with React, React Native, Next.js and Node.js, with a strong eye for user experience and the psychology behind it.",
-    "When I'm not shipping code, I'm making music.",
+    "I usually take a product from first sketch to production on my own: the design (mostly directly in code), the front end, the database and the admin tools the owner runs it with. Lately that's meant e-commerce stores and booking platforms for small Moroccan brands, and client work through Toptal.",
   ],
   facts: [
     "I like camping and hiking.",
-    "I enjoy making music, especially Gnawa music.",
     "I like both cats and dogs.",
   ],
 };
